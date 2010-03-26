@@ -1,34 +1,36 @@
 ---
 abstract: 'Add debugger command to see stack trace as HTML'
 author:
-  - 'Marcel GrE<uuml>nauer, C<< <marcel@cpan.org> >>'
-build_requires:
-  ExtUtils::MakeMaker: 6.42
-  Test::More: 0.70
+  - 'Marcel Gruenauer <marcel@cpan.org>'
+build_requires: {}
 configure_requires:
-  ExtUtils::MakeMaker: 6.42
-distribution_type: module
-generated_by: 'Module::Install version 0.91'
+  ExtUtils::MakeMaker: 6.11
+generated_by: 'Dist::Zilla version 1.100711'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: DB-Pluggable-StackTraceAsHTML
-no_index:
-  directory:
-    - inc
-    - t
-    - xt
+provides:
+  DB::Pluggable::StackTraceAsHTML:
+    file: lib/DB/Pluggable/StackTraceAsHTML.pm
+    version: 1.100850
 requires:
   Browser::Open: 0
-  Class::Accessor::Complex: 0
+  Carp: 0
+  DB::Pluggable::Plugin: 0
   Devel::StackTrace::AsHTML: 0
   Devel::StackTrace::WithLexicals: 0
+  English: 0
+  File::Find: 0
   File::Slurp: 0
-  perl: 5.6.0
+  File::Temp: 0
+  Scalar::Util: 0
+  Test::More: 0.88
+  parent: 0
+  perl: 5.008
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=DB-Pluggable-StackTraceAsHTML
   homepage: http://search.cpan.org/dist/DB-Pluggable-StackTraceAsHTML/
-  license: http://dev.perl.org/licenses/
-  repository: git://github.com/hanekomu/db-pluggable-stacktraceashtml.git
-version: 0.01
+  repository: http://github.com/hanekomu/DB-Pluggable-StackTraceAsHTML
+version: 1.100850

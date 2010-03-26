@@ -2,6 +2,9 @@ NAME
     DB::Pluggable::StackTraceAsHTML - Add debugger command to see stack
     trace as HTML
 
+VERSION
+    version 1.100850
+
 SYNOPSIS
         $ cat ~/.perldb
 
@@ -40,36 +43,37 @@ DESCRIPTION
     text stack trace and "h" indicates that the output is HTML.
 
 METHODS
-    "register"
-        Adds the "Th" command to the Perl debugger.
-
-BUGS AND LIMITATIONS
-    No bugs have been reported.
-
-    Please report any bugs or feature requests through the web interface at
-    <http://rt.cpan.org>.
+  register
+    Adds the "Th" command to the Perl debugger.
 
 INSTALLATION
     See perlmodinstall for information and options on installing Perl
     modules.
 
+BUGS AND LIMITATIONS
+    No bugs have been reported.
+
+    Please report any bugs or feature requests through the web interface at
+    <http://rt.cpan.org/Public/Dist/Display.html?Name=DB-Pluggable-StackTrac
+    eAsHTML>.
+
 AVAILABILITY
     The latest version of this module is available from the Comprehensive
     Perl Archive Network (CPAN). Visit <http://www.perl.com/CPAN/> to find a
-    CPAN site near you. Or see
+    CPAN site near you, or see
     <http://search.cpan.org/dist/DB-Pluggable-StackTraceAsHTML/>.
 
     The development version lives at
-    <http://github.com/hanekomu/db-pluggable-stacktraceashtml/>. Instead of
+    <http://github.com/hanekomu/DB-Pluggable-StackTraceAsHTML/>. Instead of
     sending patches, please fork this project using the standard git and
     github infrastructure.
 
-AUTHORS
-    Marcel Grünauer, "<marcel@cpan.org>"
+AUTHOR
+      Marcel Gruenauer <marcel@cpan.org>
 
 COPYRIGHT AND LICENSE
-    Copyright 2009 by Marcel Grünauer
+    This software is copyright (c) 2009 by Marcel Gruenauer.
 
-    This library is free software; you can redistribute it and/or modify it
-    under the same terms as Perl itself.
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
 

@@ -1,9 +1,10 @@
+
 This is the Perl distribution DB-Pluggable-StackTraceAsHTML.
 
 ## Installation
 
-DB-Pluggable-StackTraceAsHTML installation is straightforward. If your CPAN
-shell is set up, you should just be able to do
+DB-Pluggable-StackTraceAsHTML installation is straightforward.
+If your CPAN shell is set up, you should just be able to do
 
     % cpan DB::Pluggable::StackTraceAsHTML
 
@@ -18,11 +19,9 @@ Then install it:
 
 ## Documentation
 
-DB-Pluggable-StackTraceAsHTML documentation is available as in POD. So you can
-do:
+DB-Pluggable-StackTraceAsHTML documentation is available as in POD.
+So you can do:
 
     % perldoc DB::Pluggable::StackTraceAsHTML
 
-to read the documentation online with your favorite pager.
-
-Marcel Gruenauer
+to read the documentation with your favorite pager.
