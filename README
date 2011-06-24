@@ -1,26 +1,16 @@
 NAME
-    DB::Pluggable::StackTraceAsHTML - Add debugger command to see stack
-    trace as HTML
+    DB::Pluggable::Plugin::StackTraceAsHTML - Add debugger command to see
+    stack trace as HTML
 
 VERSION
-    version 1.100850
+    version 1.111750
 
 SYNOPSIS
         $ cat ~/.perldb
-
         use DB::Pluggable;
-        use YAML;
-
-        $DB::PluginHandler = DB::Pluggable->new(config => Load <<EOYAML);
-        global:
-          log:
-            level: error
-
-        plugins:
-          - module: StackTraceAsHTML
-        EOYAML
-
-        $DB::PluginHandler->run;
+        DB::Pluggable->run_with_config(\<<EOINI)
+        [StackTraceAsHTML]
+        EOINI
 
         $ perl -d foo.pl
 
@@ -31,7 +21,9 @@ SYNOPSIS
 
         1..9
         ...
-          DB<1> Th
+          DB<1> c
+          ...
+          DB<2> Th
 
 DESCRIPTION
     This plugin for DB::Pluggable adds the "Th" command to the debugger,
@@ -43,7 +35,7 @@ DESCRIPTION
     text stack trace and "h" indicates that the output is HTML.
 
 METHODS
-  register
+  initialize
     Adds the "Th" command to the Perl debugger.
 
 INSTALLATION
@@ -64,12 +56,14 @@ AVAILABILITY
     <http://search.cpan.org/dist/DB-Pluggable-StackTraceAsHTML/>.
 
     The development version lives at
-    <http://github.com/hanekomu/DB-Pluggable-StackTraceAsHTML/>. Instead of
-    sending patches, please fork this project using the standard git and
+    <http://github.com/hanekomu/DB-Pluggable-StackTraceAsHTML> and may be
+    cloned from
+    <git://github.com/hanekomu/DB-Pluggable-StackTraceAsHTML.git>. Instead
+    of sending patches, please fork this project using the standard git and
     github infrastructure.
 
 AUTHOR
-      Marcel Gruenauer <marcel@cpan.org>
+    Marcel Gruenauer <marcel@cpan.org>
 
 COPYRIGHT AND LICENSE
     This software is copyright (c) 2009 by Marcel Gruenauer.

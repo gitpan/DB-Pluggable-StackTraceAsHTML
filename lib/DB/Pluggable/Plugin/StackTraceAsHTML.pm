@@ -2,26 +2,30 @@ use 5.008;
 use strict;
 use warnings;
 
-package DB::Pluggable::StackTraceAsHTML;
-our $VERSION = '1.100850';
+package DB::Pluggable::Plugin::StackTraceAsHTML;
+BEGIN {
+  $DB::Pluggable::Plugin::StackTraceAsHTML::VERSION = '1.111750';
+}
+
 # ABSTRACT: Add debugger command to see stack trace as HTML
 use Devel::StackTrace::WithLexicals;
 use Devel::StackTrace::AsHTML;
 use File::Slurp qw(write_file);
 use Browser::Open qw(open_browser);
-use parent qw(DB::Pluggable::Plugin);
+use Role::Basic;
+with qw(DB::Pluggable::Role::Initializer);
 
-sub register {
-    my ($self, $context) = @_;
-    $self->make_command(
-        Th => sub {
-            my $filename = 'devel-stacktrace.html';
-            write_file $filename,
-              Devel::StackTrace::WithLexicals->new(ignore_package => 'DB')
-              ->as_html;
-            open_browser $filename;
-        }
-    );
+sub DB::cmd_Th {
+    my $filename = 'devel-stacktrace.html';
+    write_file $filename,
+      Devel::StackTrace::WithLexicals->new(ignore_package => 'DB')->as_html;
+    open_browser $filename;
+};
+
+sub initialize {
+    my $self = shift;
+    no warnings 'once';
+    $DB::alias{Th} = "/./; DB::cmd_Th();";
 }
 1;
 
@@ -34,29 +38,19 @@ __END__
 
 =head1 NAME
 
-DB::Pluggable::StackTraceAsHTML - Add debugger command to see stack trace as HTML
+DB::Pluggable::Plugin::StackTraceAsHTML - Add debugger command to see stack trace as HTML
 
 =head1 VERSION
 
-version 1.100850
+version 1.111750
 
 =head1 SYNOPSIS
 
     $ cat ~/.perldb
-
     use DB::Pluggable;
-    use YAML;
-
-    $DB::PluginHandler = DB::Pluggable->new(config => Load <<EOYAML);
-    global:
-      log:
-        level: error
-
-    plugins:
-      - module: StackTraceAsHTML
-    EOYAML
-
-    $DB::PluginHandler->run;
+    DB::Pluggable->run_with_config(\<<EOINI)
+    [StackTraceAsHTML]
+    EOINI
 
     $ perl -d foo.pl
 
@@ -67,7 +61,9 @@ version 1.100850
 
     1..9
     ...
-      DB<1> Th
+      DB<1> c
+      ...
+      DB<2> Th
 
 =head1 DESCRIPTION
 
@@ -81,7 +77,7 @@ stack trace and C<h> indicates that the output is HTML.
 
 =head1 METHODS
 
-=head2 register
+=head2 initialize
 
 Adds the C<Th> command to the Perl debugger.
 
@@ -100,17 +96,16 @@ L<http://rt.cpan.org/Public/Dist/Display.html?Name=DB-Pluggable-StackTraceAsHTML
 
 The latest version of this module is available from the Comprehensive Perl
 Archive Network (CPAN). Visit L<http://www.perl.com/CPAN/> to find a CPAN
-site near you, or see
-L<http://search.cpan.org/dist/DB-Pluggable-StackTraceAsHTML/>.
+site near you, or see L<http://search.cpan.org/dist/DB-Pluggable-StackTraceAsHTML/>.
 
-The development version lives at
-L<http://github.com/hanekomu/DB-Pluggable-StackTraceAsHTML/>.
-Instead of sending patches, please fork this project using the standard git
-and github infrastructure.
+The development version lives at L<http://github.com/hanekomu/DB-Pluggable-StackTraceAsHTML>
+and may be cloned from L<git://github.com/hanekomu/DB-Pluggable-StackTraceAsHTML.git>.
+Instead of sending patches, please fork this project using the standard
+git and github infrastructure.
 
 =head1 AUTHOR
 
-  Marcel Gruenauer <marcel@cpan.org>
+Marcel Gruenauer <marcel@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
